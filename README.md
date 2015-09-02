@@ -3,6 +3,7 @@
 ## Summary
 
 This chart shows the key air quality index - PM2.5 value (particulate matter less than 2.5 micrometers in diameter) of Shanghai varies with time, from 2012 Jan to 2015 Jun.  The line shows a clear seasonal pattern, PM2.5 value is highly related with season, summer is better and winter is worse. And the reader could drill down and up to view different level of details.
+Pleas refer to 'index.html' for the final design.
 
 ## Design
 
@@ -32,7 +33,7 @@ For Chart two, reviewers would like to filter the data by different year, so the
 -	Set the series line weight to 5 and enable line markers so the data points are more clear
 
 ### Final design 
-After considering all of the feedback I got, Chart two does not deliver more information since there is no clear message after comparing the data of different years. And it is a little bit distracting while having different color and lines. So I choose Chart one as the final chart and re-write the codes to improve the performance and one more level of drilling down to hourly data:
+After considering all of the feedback I got, for Chart one, I re-write the codes to improve the performance and one more level of drilling down to hourly data,please refer to 'index_initial1_final.html' for more details.
 -	Clean up the data file to remove the unnecessary data points, leave only two columns of ‘Datetime’ and ‘Value’, this will reduce the time and data size while loading the data.
 -	Define three different view: ‘month’, ‘date’ and ‘hour’ to show different level of data, use the variant ‘currentSize’ to indicate the current view. Then readers could drill up/down to see different level of information. 
 -	Add background to SVG, and add the event for handling clicking on the background, link the action to drill up function
@@ -40,6 +41,13 @@ After considering all of the feedback I got, Chart two does not deliver more inf
 -	In the drill up/down and draw function, use switch function on currentSize to capture the current view and draw the view required.
 -	In the draw function, calculate the mean value of the data before drawing by using d3 nest function, this is to help improve the performance of drawing.
 -	Add a title of time period to show the current start/end time along with the selected view
+
+For Chart two, the key issue is performance, so I update the data file, please refer to 'index_initial2_final.html' for more details.
+- Summarize the PM2.5 value to monthly value, the consolidated data file is'ShanghaiMonthlyPM25'
+- Add order rule for series so the legend could show in the correct sequence
+
+Considering the reviewer's feedback, Chart two is more explanatory while Chart one is more exploratory.For the purpose of this project, I choose the index_initial2_final.html as the final design.
+
 
 ## Feedback
 
@@ -83,6 +91,11 @@ The performance is good, and I like it is drilling down from monthly to daily to
 ###### Bao, Lin
 It works pretty well now and the overall performance has been improved.
 
+###### Castillo Rafael (Code Reviewer for Udacity)
+I agree with you and your feedback first chart is more exploratory than second chart and viewers can go up to the hourly data level in their data exploration. However I don't think first chart is as explanatory as second chart. In second chart it is clearly described the variability of air quality along the year, the trend is repeated year-by-year, while in first chart you can identify the relationship after an analysis of the curve, but the trend is far for being as clear as in second graph is.
+In this project it is requested your chart to be explanatory, rather than exploratory. So, second chart better adjust to the rubric requirements.
+
+
 ## Resource
 Thanks Hanson Wang who has helped me setting up the local web server through Windows IIS manager. And Thanks Bao, Lin, who has helped me on using nest function of d3 while handling the data to improve the performance.
 For the online resource reference , please refer to the file of reference.
@@ -90,5 +103,6 @@ For the online resource reference , please refer to the file of reference.
 ### Data
 Shanghai PM 2.5 historical data is downloaded from stateair.net and the detailed definition of each column could be found the fact sheet file,
 I have firstly loaded shanghai historical data csv files from the website above for 2012 to 2015 Jun, and then consolidated the separated yearly files into one file. I removed all of the invalid values, which was indicated as ‘Missing’, the consolidated data file is ‘ShanghaiHourlyPM25.csv’, which was used in the initial and updated design.
-I kept only the two columns of ‘DateTime’ and ‘Value’ in the updated data file ’data.csv’ for improving the performance, which was used in the final design of index.html
+I kept only the two columns of ‘DateTime’ and ‘Value’ in the updated data file ’data.csv’ for improving the performance, which was used in the final design of index_initial1_final.html
+And for the final design of index_html and index_initial2_final.html, I have summarized the PM2.5 value to monthly, and summarized in the file'ShanghaiMonthlyPM25.csv', which is used to improve the performance
 
